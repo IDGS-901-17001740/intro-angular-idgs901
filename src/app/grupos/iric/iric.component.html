@@ -20,21 +20,25 @@
           <tr>
             <th><button (click) = "showImage()" class="btn btn-sm btn-outline-primary" type="button"
               >{{muestraImg?'Oculta':'Muestra'}} Imagen</button></th>
-            <th>Foto</th>
+            <!-- <th>Foto</th> -->
             <th>Matricula</th>
             <th>Nombre</th>
             <th>Edad</th>
             <th>Correo</th>
+            <th>Calificación {{alumnoTitle}}</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let alumno of alumnosIric">
+          <tr *ngFor="let alumno of alumnosIric | alumnoFilter:listFilter">
             <td><img *ngIf="muestraImg" [src]="alumno.foto" [title]="alumno.nombre" [style.width.px]="imageWidth"
               [style.margin.px]="imageMargin"></td>
             <td>{{alumno.matricula}}</td>
-            <td>{{alumno.nombre}}</td>
+            <td>{{alumno.nombre | uppercase}}</td>
             <td>{{alumno.edad}}</td>
             <td>{{alumno.correo}}</td>
+            <td>{{alumno.calif}}</td>
+            <td><app-calificacion-alum [califica]="alumno.calif"
+              (calificaClick)="onCalificaClick($event)"></app-calificacion-alum></td>
           </tr>
         </tbody>
       </table>
